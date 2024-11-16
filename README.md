@@ -1,1 +1,1 @@
-# amazon-ecommerce-analysis-project
+# Amazon E-commerce Analysis Project
