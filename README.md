@@ -1,4 +1,4 @@
-# Amazon E-commerce Analysis Project
+# Amazon E-commerce Analysis Project Using SQL(MySql)
 
 ## Overview
 The attached dataset contains ecommerce orders of Amazon from multiple countries in 2023. It is an ecommerce company with a global footprint. In India, the company is headquartered in Hyderabad. The supply chain of the company is very strong. In our dataset, customers are located in 14 countries and they receive orders within a week. The category for which most of these orders were placed is mobile accessories.
@@ -233,13 +233,15 @@ FROM amazon_data;
 SELECT customer_country, COUNT(order_id) Total_Orders, SUM(order_value) Total_Order_Value
 FROM amazon_data
 GROUP BY customer_country
-ORDER BY Total_Orders DESC;  
+ORDER BY Total_Orders DESC;
+ 
 
 -- TOTAL ORDERS AND ORDER VALUE BY age_gender
 SELECT age_gender, COUNT(order_id) Total_Count, SUM(order_value) Total_Order_Value
 FROM amazon_data
 GROUP BY age_gender
-ORDER BY total_count;  r
+ORDER BY total_count;
+
 
 -- Orderd in month, day & hour --
 SELECT order_month, COUNT(Order_id) FROM amazon_data
@@ -254,6 +256,8 @@ SELECT order_hour, COUNT(Order_id) FROM amazon_data
 GROUP BY order_hour
 ORDER BY order_hour; -- Most order was from night time
 
+
+-- Details of Sales POC by target achieved and not --
 WITH Sales_poc_target as (
 SELECT sales_poc, SUM(order_value) Total_Order_Value, GROUP_CONCAT(DISTINCT sales_target) Sales_Target
 FROM amazon_data
@@ -262,8 +266,10 @@ ORDER BY Total_Order_Value DESC)
 
 SELECT *, CASE WHEN Total_Order_Value > Sales_Target THEN "Target Met"
 ELSE "Target Not Met" END AS Target_Status
-FROM sales_poc_target;                             -- Details of Sales POC by target achieved and not --
+FROM sales_poc_target;                             
 
+
+-- Detail of Sales Manager by target achieved or not
 WITH  Sales_manager_total AS (
 SELECT sales_poc,sales_manager, SUM(order_value) Total_Order_Value 
 FROM amazon_data
@@ -288,13 +294,17 @@ ORDER BY TotalOrderValue DESC)
 
 SELECT target_status, COUNT(*) Count
 FROM Sales_target
-GROUP BY target_status;  -- Detail of Sales Manager by target achieved or not
+GROUP BY target_status;
 
+
+ -- Total Orders & Order Value by Team --
 SELECT sales_team ,SUM(order_value) Sum_Of_Order_Value, COUNT(order_id) Total_Orders
 FROM amazon_data
 GROUP BY sales_team
-ORDER BY Sum_Of_Order_Value DESC;  -- Total Orders & Order Value by Team --
+ORDER BY Sum_Of_Order_Value DESC;
 
+
+-- Team Performance in Sales Poc --
 WITH sales_poc_target_andsum as(
 SELECT sales_poc, SUM(order_value) Total_Order_Value, GROUP_CONCAT(DISTINCT sales_target) Sales_Target
 FROM amazon_data
@@ -314,8 +324,10 @@ SELECT sales_team , COUNT(CASE WHEN target_status="Target Met" THEN 1 END) Targe
 COUNT(CASE WHEN target_status="Target Not Met" THEN 1 END) Target_Not_Met
 FROM target_of_sales_poc_in_yeam
 GROUP BY sales_team
-ORDER BY Target_Met DESC;  -- Team Performance in Sales Poc --
+ORDER BY Target_Met DESC;
 
+
+-- Team performance in Sales Manager --
 WITH team_by_manager AS (
 SELECT sales_team, sales_manager, SUM(order_value) Total_Order_Value 
 FROM amazon_data
@@ -345,3 +357,19 @@ FROM team_manager_target
 GROUP BY sales_team
 ORDER BY target_met DESC;
 ```
+
+## Findings And Conclusion
+
+- The average customer places only 1.72 orders, indicating a relatively low order frequency, with a total of 2,500 orders across 1,453 customers.
+
+- The peak ordering time occurred around midnight, with the busiest hours for purchases being between 10 PM and 2 AM.
+
+- Seniors are the major contributors in purchasing (Total).
+
+- Ireland experienced a concerning sales drought, with zero sales recorded in three consecutive months: January, April, and June.
+
+- The Sales POC performance was low, with an average achievement rate of 39%. Improvement is especially needed for the Epsilon Sales POC.
+
+- Performance among managers, except for those in Alpha, was generally poor, particularly in the Delta and Gamma teams.
+
+- If managers focused more on meeting Sales POC targets, revenue could increase by at least 4.35%, adding over 500,000 to the business.
