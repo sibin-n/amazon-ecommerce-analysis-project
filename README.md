@@ -36,12 +36,7 @@ select * from amazon_dataset2;
 
 
 create view amazon_dataset as
-select o.order_id, o.customer_id, o.customer_country, o.order_datetime, o.order_source, o.sales_poc, o.order_value, c.gender,
-c.age, c.category, st.Sales_Manager_First_Name, st.Sales_Manager_Last_Name, st.Sales_Team, st.sales_target from orders o
-join customer c
-on c.customer_id=o.customer_id
-join sales_target st
-on o.sales_poc=st.sales_poc;
+select * from amazon_dataset2;
 
 -- Deleted the Duplicate Column and added view
 
