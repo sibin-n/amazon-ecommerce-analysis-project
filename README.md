@@ -363,8 +363,8 @@ ORDER BY target_met DESC;
 
 - Ireland experienced a concerning sales drought, with zero sales recorded in three consecutive months: January, April, and June.
 
-- The Sales POC performance was low, with an average achievement rate of 39%. Improvement is especially needed for the Epsilon Sales POC.
+- The Sales Achievement Rate was 95.8%.
 
-- Performance among managers, except for those in Alpha, was generally poor, particularly in the Delta and Gamma teams.
+- Performance analysis revealed that the Epsilon team surpassed their sales target by 35%, while Beta and Gamma teams were unable to meet their target which is 500,000+ loss.
 
-- If managers focused more on meeting Sales POC targets, revenue could increase by at least 4.35%, adding over 500,000 to the business.
+- The overall sales performance achieved a 95% target completion rate, with consistency across days and months. Therefore, increasing the sales target could be a promising strategy to drive further growth..
