@@ -367,4 +367,4 @@ ORDER BY target_met DESC;
 
 - Performance analysis revealed that the Epsilon team surpassed their sales target by 35%, while Beta and Gamma teams were unable to meet their target which is 500,000+ loss.
 
-- The overall sales performance achieved a 95% target completion rate, with consistency across days and months. Therefore, increasing the sales target could be a promising strategy to drive further growth..
+- The overall sales performance achieved a 95% target completion rate, with consistency across days and months. Therefore, increasing the sales target could be a promising strategy to drive further growth.
