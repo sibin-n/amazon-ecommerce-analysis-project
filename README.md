@@ -205,22 +205,22 @@ FROM amazon_data;
 
 ## Analysis
 
+### Total Orders And Order Value By Country
 ```sql
--- TOTAL ORDERS AND ORDER VALUE BY COUNTRY --
 SELECT customer_country, COUNT(order_id) Total_Orders, SUM(order_value) Total_Order_Value
 FROM amazon_data
 GROUP BY customer_country
 ORDER BY Total_Orders DESC;
- 
-
--- TOTAL ORDERS AND ORDER VALUE BY age_gender
+```
+### Total Orders And Order Value by age_gender
+```sql
 SELECT age_gender, COUNT(order_id) Total_Count, SUM(order_value) Total_Order_Value
 FROM amazon_data
 GROUP BY age_gender
 ORDER BY total_count;
-
-
--- Orderd in month, day & hour --
+```
+### Orderd in month, day & hour
+```sql
 SELECT order_month, COUNT(Order_id) FROM amazon_data
 GROUP BY order_month
 ORDER BY order_month;  
@@ -232,9 +232,9 @@ ORDER BY order_day;
 SELECT order_hour, COUNT(Order_id) FROM amazon_data
 GROUP BY order_hour
 ORDER BY order_hour; -- Most order was from night time
-
-
--- Details of Sales POC by target achieved and not --
+```
+### Details of Sales POC by target achieved and not
+```sql
 WITH Sales_poc_target as (
 SELECT sales_poc, SUM(order_value) Total_Order_Value, GROUP_CONCAT(DISTINCT sales_target) Sales_Target
 FROM amazon_data
@@ -244,9 +244,9 @@ ORDER BY Total_Order_Value DESC)
 SELECT *, CASE WHEN Total_Order_Value > Sales_Target THEN "Target Met"
 ELSE "Target Not Met" END AS Target_Status
 FROM sales_poc_target;                             
-
-
--- Detail of Sales Manager by target achieved or not
+```
+### Detail of Sales Manager by target achieved or not
+```sql
 WITH  Sales_manager_total AS (
 SELECT sales_poc,sales_manager, SUM(order_value) Total_Order_Value 
 FROM amazon_data
@@ -272,16 +272,16 @@ ORDER BY TotalOrderValue DESC)
 SELECT target_status, COUNT(*) Count
 FROM Sales_target
 GROUP BY target_status;
-
-
- -- Total Orders & Order Value by Team --
+```
+### Total Orders & Order Value by Team
+ ```sql
 SELECT sales_team ,SUM(order_value) Sum_Of_Order_Value, COUNT(order_id) Total_Orders
 FROM amazon_data
 GROUP BY sales_team
 ORDER BY Sum_Of_Order_Value DESC;
-
-
--- Team Performance in Sales Poc --
+```
+### Team Performance in Sales Poc
+```sql
 WITH sales_poc_target_andsum as(
 SELECT sales_poc, SUM(order_value) Total_Order_Value, GROUP_CONCAT(DISTINCT sales_target) Sales_Target
 FROM amazon_data
@@ -302,9 +302,9 @@ COUNT(CASE WHEN target_status="Target Not Met" THEN 1 END) Target_Not_Met
 FROM target_of_sales_poc_in_yeam
 GROUP BY sales_team
 ORDER BY Target_Met DESC;
-
-
--- Team performance in Sales Manager --
+```
+### Team performance in Sales Manager
+```sql
 WITH team_by_manager AS (
 SELECT sales_team, sales_manager, SUM(order_value) Total_Order_Value 
 FROM amazon_data
